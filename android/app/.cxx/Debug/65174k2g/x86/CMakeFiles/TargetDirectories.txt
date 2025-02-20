@@ -1,0 +1,2 @@
+C:/Users/naumv/AndroidStudioProjects/youtube_favorites/android/app/.cxx/Debug/65174k2g/x86/CMakeFiles/edit_cache.dir
+C:/Users/naumv/AndroidStudioProjects/youtube_favorites/android/app/.cxx/Debug/65174k2g/x86/CMakeFiles/rebuild_cache.dir
