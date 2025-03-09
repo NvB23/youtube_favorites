@@ -53,7 +53,7 @@ class DataSearch extends SearchDelegate {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(snapshot.data?[index]),
-                  leading: const Icon(Icons.play_arrow),
+                  leading: const Icon(Icons.search),
                   onTap: () {
                     close(context, snapshot.data?[index]);
                   },

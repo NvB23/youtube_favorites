@@ -9,6 +9,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var bloc = BlocProvider.getBloc<VideosBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: SizedBox(
@@ -35,7 +37,7 @@ class Home extends StatelessWidget {
               onPressed: () async {
                 String result =
                     await showSearch(context: context, delegate: DataSearch());
-                BlocProvider.getBloc<VideosBloc>().inSearch.add(result);
+                bloc.inSearch.add(result);
               },
               icon: const Icon(
                 Icons.search,
@@ -44,14 +46,26 @@ class Home extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream: BlocProvider.getBloc<VideosBloc>().outVideos,
+        stream: bloc.outVideos,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                return VideoTile(video: snapshot.data![index]);
+                if (index < snapshot.data!.length) {
+                  return VideoTile(video: snapshot.data![index]);
+                } else {
+                  bloc.inSearch.add(null);
+                  return Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                    ),
+                  );
+                }
               },
-              itemCount: snapshot.data?.length,
+              itemCount: snapshot.data!.length + 1,
             );
           } else {
             return Container();
